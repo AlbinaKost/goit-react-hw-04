@@ -1,5 +1,11 @@
 import ImageCard from "../ImageCard/ImageCard";
-const ImageGallery = ({ images }) => {
+
+const ImageGallery = ({ images,onImageClick }) => {
+  const handleImageClick = (image) => {
+    if (onImageClick) {
+      onImageClick(image);
+    }
+  };
   return (
     <ul
       style={{

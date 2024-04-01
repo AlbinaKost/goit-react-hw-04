@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+
 const ImageModal = ({ modalIsOpen, closeModal, image }) => {
   return (
     <Modal
