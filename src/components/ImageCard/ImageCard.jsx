@@ -1,44 +1,18 @@
-import { useState } from "react";
-import ImageModal from "../ImageModal/ImageModal";
+import css from './ImageCard.module.css';
 
-// const ImageCard = ({ image }) => {
-//   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-//   const openModal = () => {
-//     setModalIsOpen(true);
-//   };
-
-//   const closeModal = () => {
-//     setModalIsOpen(false);
-//   };
-
-//   return (
-//     <div>
-//       <img
-//         src={image.urls.small}
-//         alt={image.description}
-//         onClick={openModal}
-//         style={{ width: "20vw", height: "35vh" }}
-//       />
-//       <ImageModal
-//         modalIsOpen={modalIsOpen}
-//         closeModal={closeModal}
-//         image={image}
-//       />
-//     </div>
-//   );
-// };
-
-// export default ImageCard;
-
-const ImageCard = ({ image, onClick, openModal }) => {
+const ImageCard = ({ card, onSelect }) => {
   return (
-    <div>
+    <div className={css.container}>
       <img
-        src={image.urls.small}
-        alt={image.description}
-        onClick={(openModal) => onClick(image)}
-        style={{ width: "20vw", height: "35vh" }}
+        className={css.img}
+        src={card.urls.small}
+        alt={card.alt_description}
+        onClick={() =>
+          onSelect(true, {
+            src: card.urls.regular,
+            description: card.alt_description,
+          })
+        }
       />
     </div>
   );

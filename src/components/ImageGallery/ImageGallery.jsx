@@ -1,27 +1,16 @@
-import ImageCard from "../ImageCard/ImageCard";
+import ImageCard from '../ImageCard/ImageCard';
+import css from './ImageGallery.module.css';
 
-const ImageGallery = ({ images,onImageClick }) => {
-  const handleImageClick = (image) => {
-    if (onImageClick) {
-      onImageClick(image);
-    }
-  };
+const ImageGallery = ({ photos, onSelect }) => {
   return (
-    <ul
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        listStyle: "none",
-        gap: "15px",
-        paddingTop: "50px",
-      }}
-    >
-      {images.map((image) => (
-        <li key={image.id}>
-          <ImageCard image={image} />
+    <ul className={css.list}>
+      {photos.map(photo => (
+        <li className={css.item} key={photo.id}>
+          <ImageCard card={photo} onSelect={onSelect} />
         </li>
       ))}
     </ul>
   );
 };
+
 export default ImageGallery;

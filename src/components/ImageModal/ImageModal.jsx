@@ -1,35 +1,20 @@
 import Modal from "react-modal";
+import css from './ImageModal.module.css';
 
-const ImageModal = ({ modalIsOpen, closeModal, image }) => {
+const ImageModal = ({ isOpen = false, photo, onChange }) => {
+  Modal.setAppElement(document.getElementById('root'));
   return (
     <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      contentLabel="Image Modal"
-      style={{
-        content: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          // width: "100vw",
-          // height: "100vh",
-          // border: "none",
-          // inset: "0px",
-          // padding: "0px",
-          // background: "black",
-        },
-      }}
+      className={css.modal}
+      isOpen={isOpen}
+      onRequestClose={() => onChange(false)}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+      preventScroll={true}
     >
-      <img
-        src={image.urls.full}
-        alt={image.description}
-        style={{
-          maxHeight: "100vh",
-          maxWidth: "100vw",
-        }}
-      />
-      <button onClick={closeModal}>Close</button>
+      <img className={css.modalImg} src={photo.src} />
     </Modal>
   );
 };
+
 export default ImageModal;

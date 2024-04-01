@@ -1,33 +1,44 @@
 import toast, { Toaster } from "react-hot-toast";
+import css from './SearchBar.module.css';
 import { useState } from "react";
-export default function SearchBar({ onSubmit }) {
-  const [query, setQuery] = useState("");
+import { FiSearch } from 'react-icons/fi';
 
-  function onFormSubmit(e) {
+const SearchBar = ({ onSubmit }) => {
+  const [value, setValue] = useState('');
+
+  const handleSubmit = e => {
     e.preventDefault();
-    if (query.trim() === "") {
-      toast("Please,enter text to search for images");
-    } else {
-      onSubmit(query);
-      setQuery("");
+    const query = value.trim();
+    if (!query.length) {
+      toast.error('Please, enter your query');
     }
-  }
+
+    onSubmit(query);
+  };
+
+  const handleChange = e => {
+    const { value } = e.target;
+    setValue(value);
+  };
 
   return (
-    <header>
-      <form onSubmit={onFormSubmit}>
+    <header className={css.search}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input
+          className={css.input}
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          
+          value={value}
+          onChange={handleChange}
         />
-        <button type="submit">Search</button>
-        <Toaster />
+        <button className={css.searchBtn} type="submit">
+          <FiSearch size="16px" />
+        </button>
       </form>
     </header>
   );
-}
+};
+
+export default SearchBar;
